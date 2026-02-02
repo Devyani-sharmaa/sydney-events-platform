@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Tickets</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f8; padding: 40px; }
+        .box {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0077ff;
+            color: white;
+            border: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>{{ event.title }}</h2>
+    <p>Enter your email to continue to tickets</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Continue</button>
+    </form>
+</div>
+
+</body>
+</html>

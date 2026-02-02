@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ event.title }}</title>
+    <style>
+        body { font-family: Arial; background:#f4f6f8; padding:30px; }
+        .container { max-width:800px; margin:auto; background:white; padding:20px; border-radius:10px; }
+        img { width:100%; border-radius:10px; margin-bottom:15px; }
+        .btn {
+            display:inline-block;
+            padding:12px 18px;
+            background:#0077ff;
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            border-radius:6px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    {% if event.image_url %}
+        <img src="{{ event.image_url }}">
+    {% endif %}
+
+    <h1>{{ event.title }}</h1>
+
+    <p><b>📍 Venue:</b> {{ event.venue_name|default:"Sydney" }}</p>
+    <p><b>🗓 Date:</b> {{ event.date_time|date:"M d, Y H:i" }}</p>
+    <p><b>Category:</b> {{ event.category|default:"General" }}</p>
+
+    <p>{{ event.description|default:"Full event details coming soon." }}</p>
+
+    <br>
+    <a class="btn" href="{% url 'get_tickets' event.id %}">GET TICKETS</a>
+</div>
+
+</body>
+</html>

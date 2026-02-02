@@ -1,0 +1,27 @@
+[
+    {
+      "title": "Sydney Food Festival",
+      "description": "A celebration of global cuisines in Sydney.",
+      "venue_name": "Darling Harbour",
+      "date_time": "2026-03-10T18:00:00",
+      "image_url": "https://example.com/foodfest.jpg",
+      "source_url": "https://sample.com/event1"
+    },
+    {
+      "title": "Harbour Night Run",
+      "description": "Night marathon with city skyline views.",
+      "venue_name": "Sydney Harbour Bridge",
+      "date_time": "2026-03-15T19:30:00",
+      "image_url": "https://example.com/run.jpg",
+      "source_url": "https://sample.com/event2"
+    },
+    {
+      "title": "Open Air Cinema",
+      "description": "Outdoor movie screening under the stars.",
+      "venue_name": "The Rocks",
+      "date_time": "2026-03-20T20:00:00",
+      "image_url": "https://example.com/cinema.jpg",
+      "source_url": "https://sample.com/event3"
+    }
+  ]
+  

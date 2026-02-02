@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logged Out | Sydney Events</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 { margin-bottom: 15px; }
+
+        .btn {
+            display: inline-block;
+            margin: 10px 8px 0;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .login-btn { background: #ff758c; }
+        .login-btn:hover { background: #ff4f70; }
+
+        .home-btn { background: #6c63ff; }
+        .home-btn:hover { background: #574fd6; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>You’ve been logged out 👋</h2>
+    <p>Come back soon for more Sydney events!</p>
+
+    <a href="/" class="btn home-btn">🏠 Go to Homepage</a>
+    <a href="{% url 'account_login' %}" class="btn login-btn">🔐 Login Again</a>
+</div>
+
+</body>
+</html>
