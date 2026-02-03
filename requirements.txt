@@ -5,3 +5,4 @@ requests==2.32.3
 beautifulsoup4==4.12.3
 django-allauth==0.61.1
 psycopg2-binary==2.9.9
+dj-database-url==2.1.0
