@@ -1,15 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 from events.models import Event
+
+
+def get_event_description(event_url):
+    try:
+        res = requests.get(event_url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
+        soup = BeautifulSoup(res.text, "html.parser")
+        p = soup.find("p")
+        return p.text.strip() if p else "No description available."
+    except:
+        return "No description available."
 
 
 def scrape_sydney_events():
     url = "https://www.sydney.com/events"
 
-    headers = {
-        "User-Agent": "Mozilla/5.0"
-    }
+    headers = {"User-Agent": "Mozilla/5.0"}
 
     response = requests.get(url, headers=headers, timeout=10)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -33,25 +42,29 @@ def scrape_sydney_events():
             link = "https://www.sydney.com" + link
 
         image_url = ""
-        if img_tag and img_tag.get("src"):
-            image_url = img_tag.get("src")
+        if img_tag:
+            image_url = img_tag.get("src") or img_tag.get("data-src") or ""
 
-        # Dummy values (website doesn't always show these)
-        venue_name = "Sydney Venue"
-        venue_address = "Sydney, Australia"
-        category = "General Event"
-        description = "Event imported automatically from Sydney.com"
+        # DATE PARSE
+        date_time = timezone.now()
+        time_tag = card.find("time")
+        if time_tag and time_tag.get("datetime"):
+            parsed_date = parse_datetime(time_tag["datetime"])
+            if parsed_date:
+                date_time = parsed_date
+
+        description = get_event_description(link)
 
         obj, created = Event.objects.update_or_create(
-            source_url=link,  # UNIQUE FIELD (important)
+            source_url=link,
             defaults={
                 "title": title,
-                "date_time": timezone.now(),
-                "venue_name": venue_name,
-                "venue_address": venue_address,
+                "date_time": date_time,
+                "venue_name": "Sydney Venue",
+                "venue_address": "Sydney, Australia",
                 "city": "Sydney",
                 "description": description,
-                "category": category,
+                "category": "General Event",
                 "image_url": image_url,
                 "source_name": "Sydney.com",
                 "status": "new",
